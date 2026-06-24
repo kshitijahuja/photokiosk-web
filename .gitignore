@@ -1,0 +1,10 @@
+node_modules/
+.next/
+public/index.html
+public/index.txt
+public/*.js
+public/*.css
+*.log
+.DS_Store
+.env
+.env.local
