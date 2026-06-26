@@ -1,2 +1,0 @@
-This is a test file for deployment testing.
-Created to verify git push server main works correctly.
