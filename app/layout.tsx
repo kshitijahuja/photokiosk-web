@@ -1,3 +1,4 @@
+// Test deployment with fixed git hook
 import type { Metadata } from 'next';
 import './globals.css';
 import ScrollToTopButton from './components/ScrollToTopButton';
