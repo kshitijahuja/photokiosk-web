@@ -1,8 +1,49 @@
+'use client';
+
+import { useState } from 'react';
+
 export default function Contact() {
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name'),
+      school: formData.get('school'),
+      role: formData.get('role'),
+      email: formData.get('email'),
+      size: formData.get('size'),
+      message: formData.get('message'),
+    };
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) throw new Error('Failed to submit');
+      setSuccess(true);
+      (e.target as HTMLFormElement).reset();
+      setTimeout(() => setSuccess(false), 5000);
+    } catch (err) {
+      setError('Failed to submit. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="w-full">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-50 to-white py-20 sm:py-28">
+      <section className="bg-gradient-to-br from-blue-50 to-white py-8 sm:py-10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl sm:text-6xl font-bold text-gray-900 mb-6">
             Request a Demo
@@ -14,12 +55,12 @@ export default function Contact() {
       </section>
 
       {/* Contact Form Section */}
-      <section className="py-20 sm:py-24 bg-white">
+      <section className="py-10 sm:py-12 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Form */}
             <div className="lg:col-span-2">
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 {/* Name */}
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-900 mb-2">
@@ -119,12 +160,25 @@ export default function Contact() {
                   ></textarea>
                 </div>
 
+                {/* Messages */}
+                {success && (
+                  <div className="p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
+                    ✓ Demo request received! We'll be in touch within 24 hours.
+                  </div>
+                )}
+                {error && (
+                  <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
+                    {error}
+                  </div>
+                )}
+
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full px-6 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-light transition-colors text-lg"
+                  disabled={loading}
+                  className="w-full px-6 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-light transition-colors text-lg disabled:opacity-50"
                 >
-                  Request a Demo
+                  {loading ? 'Submitting...' : 'Request a Demo'}
                 </button>
 
                 <p className="text-sm text-gray-600 text-center">
@@ -139,31 +193,6 @@ export default function Contact() {
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Get in Touch</h3>
 
                 <div className="space-y-6">
-                  {/* Email Support */}
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-2">Email</h4>
-                    <a href="mailto:support@photokiosk.co" className="text-primary hover:underline">
-                      support@photokiosk.co
-                    </a>
-                  </div>
-
-                  {/* Phone Support */}
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-2">Response Time</h4>
-                    <p className="text-gray-700 text-sm">
-                      We typically respond to demo requests within 24 hours on business days.
-                    </p>
-                  </div>
-
-                  {/* Office Hours */}
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-2">Hours</h4>
-                    <p className="text-gray-700 text-sm">
-                      Monday – Friday<br />
-                      8:00 AM – 5:00 PM PT
-                    </p>
-                  </div>
-
                   {/* Why Demo */}
                   <div>
                     <h4 className="font-semibold text-gray-900 mb-2">Why Request a Demo?</h4>
@@ -175,29 +204,6 @@ export default function Contact() {
                     </ul>
                   </div>
                 </div>
-              </div>
-
-              {/* Quick Facts */}
-              <div className="mt-8 p-6 bg-blue-50 rounded-lg border border-blue-200">
-                <h4 className="font-semibold text-gray-900 mb-4">Quick Facts</h4>
-                <ul className="space-y-3 text-sm text-gray-700">
-                  <li className="flex items-start">
-                    <span className="text-primary font-bold mr-2">✓</span>
-                    <span>Trusted by 500+ schools</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-primary font-bold mr-2">✓</span>
-                    <span>Enterprise-grade security</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-primary font-bold mr-2">✓</span>
-                    <span>30-day free trial</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-primary font-bold mr-2">✓</span>
-                    <span>No credit card required</span>
-                  </li>
-                </ul>
               </div>
             </div>
           </div>
