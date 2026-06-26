@@ -49,7 +49,7 @@ export default function Contact() {
             Request a Demo
           </h1>
           <p className="text-xl text-gray-600">
-            Let's show you how PhotoKiosk can simplify photo collection at your school. Fill out the form below and we'll be in touch within 24 hours.
+            Let's show you how PhotoKiosk can simplify photo collection at your school. Fill out the form below and we'll be in touch within 48 hours.
           </p>
         </div>
       </section>
@@ -182,7 +182,7 @@ export default function Contact() {
                 </button>
 
                 <p className="text-sm text-gray-600 text-center">
-                  We'll respond within 24 hours during business days.
+                  We'll respond within 48 hours during business days.
                 </p>
               </form>
             </div>
