@@ -1,0 +1,2 @@
+- "Schools retain full control over their data and who can access it.". Can we say this,given files are either uploaded to our EC2 server, or directly to school's Google Drive.
+- update email to info@school-stack.com
