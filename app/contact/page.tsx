@@ -216,7 +216,7 @@ export default function Contact() {
           <h2 className="text-4xl font-bold text-gray-900 mb-4 text-center">Frequently Asked Questions</h2>
           <p className="text-center text-gray-600 text-lg mb-12">Have other questions? Email us at support@photokiosk.co</p>
 
-          <div className="space-y-3">
+          <div className="space-y-2">
             {/* FAQ 1 */}
             <details className="bg-white p-6 rounded-lg border border-gray-200 cursor-pointer group">
               <summary className="flex items-center justify-between font-semibold text-gray-900 text-lg">
