@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git push *)",
+      "Bash(git checkout *)",
+      "Bash(npm install *)",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__new_page",
+      "Read(//var/folders/k3/30085zl916zgpq6r5ld1l4fm0000gn/T/chrome-devtools-mcp-mVGib0/**)",
+      "Read(//private/var/folders/k3/30085zl916zgpq6r5ld1l4fm0000gn/T/chrome-devtools-mcp-mVGib0/**)",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__navigate_page",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__take_screenshot",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__list_console_messages",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__list_network_requests",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__resize_page",
+      "Bash(npm run *)",
+      "Bash(python3 -m http.server 8000)",
+      "Bash(sleep 2 echo \"HTTP Server started. PID: $!\" ps aux)"
+    ]
+  }
+}
