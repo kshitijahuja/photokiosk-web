@@ -1,16 +1,26 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { Turnstile } from '@marsidev/react-turnstile';
 
 export default function Contact() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const turnstileRef = useRef<any>(null);
+  const isProduction = process.env.NODE_ENV === 'production';
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError('');
+
+    if (isProduction && !turnstileToken) {
+      setError('Please complete the Turnstile verification');
+      setLoading(false);
+      return;
+    }
 
     const formData = new FormData(e.currentTarget);
     const data = {
@@ -20,6 +30,7 @@ export default function Contact() {
       email: formData.get('email'),
       size: formData.get('size'),
       message: formData.get('message'),
+      turnstileToken: isProduction ? turnstileToken : undefined,
     };
 
     try {
@@ -32,6 +43,10 @@ export default function Contact() {
       if (!response.ok) throw new Error('Failed to submit');
       setSuccess(true);
       (e.target as HTMLFormElement).reset();
+      setTurnstileToken('');
+      if (turnstileRef.current) {
+        turnstileRef.current.reset();
+      }
       setTimeout(() => setSuccess(false), 5000);
     } catch (err) {
       setError('Failed to submit. Please try again.');
@@ -169,6 +184,18 @@ export default function Contact() {
                 {error && (
                   <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
                     {error}
+                  </div>
+                )}
+
+                {/* Turnstile - only shown in production */}
+                {isProduction && (
+                  <div className="flex justify-center">
+                    <Turnstile
+                      ref={turnstileRef}
+                      siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ''}
+                      onSuccess={(token) => setTurnstileToken(token)}
+                      onError={() => setTurnstileToken('')}
+                    />
                   </div>
                 )}
 
