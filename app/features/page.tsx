@@ -144,9 +144,9 @@ export default function Features() {
               <p className="text-gray-700">Auto-expiry warnings keep your account secure. Sessions expire automatically after inactivity.</p>
             </div>
             <div className="p-8">
-              <IconWifi />
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">Works Offline</h3>
-              <p className="text-gray-700">Upload photos even with spotty connection. Progressive Web App design syncs when you're back online.</p>
+              <IconUsers />
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">Customized Member Lists</h3>
+              <p className="text-gray-700">Upload photos only for the member types your school needs. Admin-configured visibility ensures families submit exactly who's required.</p>
             </div>
           </div>
         </div>
