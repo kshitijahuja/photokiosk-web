@@ -206,8 +206,8 @@ export default function Home() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.111 16.251a.75.75 0 0 0 .75.75h6.278a.75.75 0 1 0 0-1.5H8.861a.75.75 0 0 0-.75.75Z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12.75 3v9.75m0 0-3-3m3 3 3-3M3.75 21h16.5" />
               </svg>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Works Offline</h3>
-              <p className="text-gray-600">Progressive Web App with offline-first design. Families can submit photos even with spotty connection.</p>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Customized Member Lists</h3>
+              <p className="text-gray-600">Upload photos only for the member types your school needs. Admin-configured visibility ensures families submit exactly who's required.</p>
             </div>
           </div>
         </div>
